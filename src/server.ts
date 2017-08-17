@@ -5,7 +5,7 @@ import { router as apiRouter } from "./routers/api.router";
 
 const app = express();
 
-app.set("port", 3000);
+app.set("port", 8080);
 // app.set("env", "development");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
