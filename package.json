@@ -19,7 +19,12 @@
     "clean": "rimraf dist",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
-    "watch": "npm run build -- --watch"
+    "watch": "npm run build -- --watch",
+    "test": "jasmine-node --verbose --junitreport --captureExceptions dist/tests/api",
+    "test:j": "jasmine",
+    "e2e:init": "webdriver-manager update",
+    "e2e:rundriver": "webdriver-manager start",
+    "e2e:runtests": "protractor protractor.conf.js"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
@@ -29,8 +34,15 @@
   "devDependencies": {
     "@types/body-parser": "^1.16.3",
     "@types/express": "^4.0.35",
+    "@types/jasmine": "^2.5.53",
     "@types/node": "^7.0.0",
+    "@types/protractor": "^4.0.0",
+    "@types/supertest": "^2.0.2",
+    "concurrently": "^3.5.0",
+    "jasmine": "^2.7.0",
+    "jasmine-node": "^1.14.5",
     "rimraf": "^2.0.0",
+    "supertest": "^3.0.0",
     "ts-node": "^3.0.0",
     "tslint": "^5.0.0",
     "typescript": "^2.0.0"

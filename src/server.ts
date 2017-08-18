@@ -54,4 +54,4 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   });
 });
 
-export let module = app;
+export let server = app;
