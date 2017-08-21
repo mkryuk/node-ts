@@ -7,4 +7,5 @@ export interface IDataResource {
 export interface IUserService {
   getAllUsers(): IUser[];
   getUserById(id: number): IUser;
+  getUserByUsername(username: string): IUser;
 }

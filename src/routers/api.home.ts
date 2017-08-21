@@ -1,9 +1,7 @@
 import * as express from "express";
 export let homeRouter = express.Router();
 
-import { HomeController } from "./../controllers/home.controller/home.controller";
-
-const homeController = new HomeController();
+import { homeController } from "./../controllers/home.controller/home.controller";
 
 /* Home API /api/home */
 

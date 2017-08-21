@@ -1,15 +1,18 @@
 import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as path from "path";
+import { config } from "./config";
+import { passportObj } from "./controllers/passport.controller/passport.controller";
 import { router as apiRouter } from "./routers/api.router";
 
 const app = express();
 
-app.set("port", 8080);
+app.set("port", config.port);
 // app.set("env", "development");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public"), { maxAge: 31557600000 }));
+app.use(passportObj.initialize());
 
 app.use("/api", apiRouter);
 

@@ -6,3 +6,4 @@ export class HomeController {
     res.json({ data: "HOME DATA" });
   }
 }
+export const homeController = new HomeController();

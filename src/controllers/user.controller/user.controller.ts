@@ -8,12 +8,22 @@ export class UserController {
   }
   //  GET /api/users
   public getAllUsers(req: Request, res: Response) {
-    res.json({ users: this.uService.getAllUsers() });
+    const users = this.uService.getAllUsers()
+      .map((user) => {
+        return { id: user.id, name: user.name, username: user.username };
+      });
+    res.json({ users });
   }
 
   //  GET /api/users/:id
   public getUserById(req: Request, res: Response) {
-    res.json(this.uService.getUserById(parseInt(req.params.id, 10)));
+    const user = this.uService.getUserById(parseInt(req.params.id, 10));
+    res.json({ id: user.id, name: user.name, username: user.username });
+  }
+  //  GET /api/users/:id/info
+  public getUserInfo(req: Request, res: Response) {
+    const user = this.uService.getUserById(parseInt(req.params.id, 10));
+    res.json(user);
   }
 }
 

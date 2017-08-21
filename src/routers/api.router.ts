@@ -2,6 +2,7 @@ import * as express from "express";
 export let router = express.Router();
 
 import { homeRouter } from "./api.home";
+import { loginRouter } from "./api.login";
 import { usersRouter } from "./api.users";
 
 // enable CORS
@@ -22,3 +23,7 @@ router.use("/home", homeRouter);
 // API for users
 // Router for /api/users
 router.use("/users", usersRouter);
+
+// API for login
+// Router for /api/login
+router.use("/login", loginRouter);
