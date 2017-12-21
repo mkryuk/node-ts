@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import jwt = require("jsonwebtoken");
 import { config } from "../../config";
-const secretTokenKey = config.secretTokenKey;
+const secretTokenKey = config.SECRET_TOKEN_KEY;
 
 export class AuthController {
 

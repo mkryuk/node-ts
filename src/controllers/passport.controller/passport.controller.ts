@@ -5,7 +5,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { config } from "../../config";
 import { userService } from "./../../services/user.service/user.service";
 
-const secretTokenKey = config.secretTokenKey;
+const secretTokenKey = config.SECRET_TOKEN_KEY;
 const localStrategy = new LocalStrategy({
   passwordField: "email",
   usernameField: "username",

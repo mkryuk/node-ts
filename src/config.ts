@@ -1,7 +1,9 @@
 export const config = {
-  ip: process.env.NODEJS_IP || "127.0.0.1",
-  port: normalizePort(process.env.PORT || 8080),
-  secretTokenKey: process.env.TOKEN_SECRET || "#tokenSecret#",
+  IP: process.env.NODEJS_IP || "127.0.0.1",
+  PORT: normalizePort(process.env.PORT || 8080),
+  SECRET_TOKEN_KEY: process.env.TOKEN_SECRET || "#tokenSecret#",
+  MONGO_CONNECTION_STRING: process.env.MONGO_CONNECTION_STRING || "mongodb://localhost:27017/nodets",
+  MONGO_TEST_CONNECTION_STRING: process.env.MONGO_TEST_CONNECTION_STRING || "mongodb://localhost:27017/nodets_tests",
 };
 
 /**

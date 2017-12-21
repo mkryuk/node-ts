@@ -1,4 +1,4 @@
-import { IUser } from "../../models/iuser.model";
+import { IUser } from "../../interfaces/iuser";
 
 export interface IDataResource {
   readFileSync(filename: string, encoding: string): string;

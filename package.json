@@ -1,12 +1,14 @@
 {
   "name": "node-ts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "node-ts",
   "license": "MIT",
   "repository": "",
-  "author": "",
+  "author": "mkryuk@gmail.com",
   "keywords": [
-    ""
+    "node",
+    "mongodb",
+    "typescript"
   ],
   "files": [
     "lib"
@@ -14,46 +16,51 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "start": "npm run build && npm run serve",
-    "serve": "node dist/server.js",
-    "clean": "rimraf dist",
-    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
-    "watch": "npm run build -- --watch",
-    "test": "jasmine-node --verbose --junitreport --captureExceptions dist/tests/api",
-    "test:j": "jasmine",
+    "clean": "rimraf dist",
     "e2e:init": "webdriver-manager update",
     "e2e:rundriver": "webdriver-manager start",
-    "e2e:runtests": "protractor protractor.conf.js"
+    "e2e:runtests": "protractor protractor.conf.js",
+    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+    "serve": "node dist/server.js",
+    "start": "npm run build && npm run serve",
+    "test:db": "jasmine JASMINE_CONFIG_PATH=spec/support/jasmine.db.json",
+    "test:j": "jasmine",
+    "test": "jasmine-node --verbose --junitreport --captureExceptions dist/tests/api",
+    "watch": "npm run build -- --watch"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
+    "concurrently": "^3.5.0",
     "express": "^4.15.3",
-    "path": "^0.12.7"
+    "jasmine-node": "^1.14.5",
+    "jasmine": "^2.7.0",
+    "jsonwebtoken": "^7.4.3",
+    "mongoose": "^4.13.7",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
+    "passport": "^0.4.0",
+    "path": "^0.12.7",
+    "protractor": "^5.2.2",
+    "rimraf": "^2.0.0",
+    "supertest": "^3.0.0",
+    "ts-node": "^3.0.0",
+    "tslint": "^5.0.0",
+    "typescript": "^2.0.0",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.3",
     "@types/express": "^4.0.35",
     "@types/jasmine": "^2.5.53",
     "@types/jsonwebtoken": "^7.2.3",
+    "@types/mongoose": "^4.7.29",
     "@types/node": "^7.0.0",
     "@types/passport": "^0.3.3",
     "@types/passport-http-bearer": "^1.0.30",
     "@types/passport-local": "^1.0.30",
-    "@types/protractor": "^4.0.0",
     "@types/supertest": "^2.0.2",
-    "concurrently": "^3.5.0",
-    "jasmine": "^2.7.0",
-    "jasmine-node": "^1.14.5",
-    "jsonwebtoken": "^7.4.3",
-    "passport": "^0.4.0",
-    "passport-http-bearer": "^1.0.1",
-    "passport-local": "^1.0.0",
-    "rimraf": "^2.0.0",
-    "supertest": "^3.0.0",
-    "ts-node": "^3.0.0",
-    "tslint": "^5.0.0",
-    "typescript": "^2.0.0"
+    "@types/uuid": "^3.4.3"
   },
   "engines": {
     "node": ">=4.0.0"

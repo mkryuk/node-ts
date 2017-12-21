@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import { IUser } from "../../models/iuser.model";
+import { IUser } from "../../interfaces/iuser";
 import { IDataResource, IUserService } from "./iuser.service";
 export class UserService implements IUserService {
   constructor(private dataResource: IDataResource) {
