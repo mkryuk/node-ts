@@ -22,7 +22,9 @@
     "e2e:rundriver": "webdriver-manager start",
     "e2e:runtests": "protractor protractor.conf.js",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+    "serve:dev": "nodemon ./dist/app.js",
     "serve": "node dist/app.js",
+    "start:dev": "npm run build && npm run serve:dev",
     "start": "npm run build && npm run serve",
     "test:db": "jasmine JASMINE_CONFIG_PATH=spec/support/jasmine.db.json",
     "test:j": "jasmine",
@@ -60,7 +62,8 @@
     "@types/passport-http-bearer": "^1.0.30",
     "@types/passport-local": "^1.0.30",
     "@types/supertest": "^2.0.2",
-    "@types/uuid": "^3.4.3"
+    "@types/uuid": "^3.4.3",
+    "nodemon": "^1.14.3"
   },
   "engines": {
     "node": ">=4.0.0"
