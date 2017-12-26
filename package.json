@@ -26,7 +26,7 @@
     "serve": "node dist/app.js",
     "start:dev": "npm run build && npm run serve:dev",
     "start": "npm run build && npm run serve",
-    "test:db": "jasmine JASMINE_CONFIG_PATH=spec/support/jasmine.db.json",
+    "test:db": "nodemon --exec jasmine JASMINE_CONFIG_PATH=spec/support/jasmine.db.json",
     "test:j": "jasmine",
     "test": "jasmine-node --verbose --junitreport --captureExceptions dist/tests/api",
     "watch": "npm run build -- --watch"

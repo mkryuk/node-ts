@@ -13,10 +13,14 @@ export class TodoMongoResource implements ITodoResource {
         return this.toITodo(result);
       });
   }
-  public removeTodo(conditions: object): Promise<any> {
-    return this.Todo.remove(conditions)
+  public removeTodo(id: string): Promise<ITodo> {
+    return this.Todo.findByIdAndRemove(id)
       .then((result) => {
-        return result;
+        if (result) {
+          return this.toITodo(result);
+        } else {
+          return null;
+        }
       });
   }
   public getAllTodos(userId: string): Promise<ITodo[]> {
@@ -32,8 +36,16 @@ export class TodoMongoResource implements ITodoResource {
       });
   }
 
+  public dropAllTodos(): Promise<boolean> {
+    return this.Todo.remove({})
+      .then(() => {
+        return true;
+      });
+  }
+
   private toITodo(obj: ITodoModel): ITodo {
     return {
+      id: obj._id,
       userId: obj.userId,
       completed: obj.completed,
       title: obj.title,

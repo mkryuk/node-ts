@@ -28,7 +28,7 @@ describe("/GET users", () => {
   });
 
   it("should get single user via url", (done) => {
-    supertest("http://localhost:8080").get("/api/users/1")
+    supertest(app).get("/api/users/1")
       .set("Content-Type", "application/json")
       .expect(200)
       .end((err, res) => {

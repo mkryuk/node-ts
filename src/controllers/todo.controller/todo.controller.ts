@@ -4,9 +4,6 @@ import { ITodo } from "../../interfaces/itodo";
 import { ITodoService } from "../../services/todo.service/itodo.service";
 import { todoService } from "../../services/todo.service/todo.service";
 export class TodoController {
-  /**
-   *
-   */
   constructor(private service: ITodoService) {
   }
   //  GET /api/todos
@@ -24,6 +21,21 @@ export class TodoController {
     const todo: ITodo = req.body;
     return this.service.addTodo(todo)
       .then((result) => {
+        return res.json(result);
+      })
+      .catch(next);
+  }
+
+  //  DELETE /api/todos/:id
+  public removeTodo(req: Request, res: Response, next: any) {
+    const id: string = req.params.id;
+    return this.service.removeTodo(id)
+      .then((result) => {
+        if (result === null) {
+          const err: any = new Error("TodoNotFound");
+          err.status = 404;
+          throw err;
+        }
         return res.json(result);
       })
       .catch(next);

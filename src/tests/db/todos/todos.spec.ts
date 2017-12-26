@@ -21,7 +21,7 @@ describe("mongodb test todos", () => {
 
   beforeEach((done) => {
     // clear todos collection
-    todoService.removeTodo({})
+    todoService.dropAllTodos()
       .then(() => { done(); });
   });
 

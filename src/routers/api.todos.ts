@@ -22,6 +22,10 @@ export class TodoRouter {
       .post(
       // passportObj.authenticate("bearer", { session: false }),
       this.controller.addTodo.bind(this.controller));
+
+    this.router.route("/:id")
+      // DELETE /api/todos/:id
+      .delete(this.controller.removeTodo.bind(this.controller));
   }
 }
 

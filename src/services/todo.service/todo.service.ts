@@ -12,13 +12,11 @@ export class TodoService implements ITodoService {
         return result;
       });
   }
-  public removeTodo(conditions: object): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.todoResource.removeTodo(conditions)
-        .then((res) => { resolve(res); })
-        .catch((err) => { reject(err); });
-    });
-
+  public removeTodo(id: string): Promise<ITodo> {
+    return this.todoResource.removeTodo(id)
+      .then((result) => {
+        return result;
+      });
   }
   public getAllTodos(userId: string): Promise<ITodo[]> {
     return this.todoResource.getAllTodos(userId)
@@ -28,6 +26,13 @@ export class TodoService implements ITodoService {
   }
   public getTodoById(id: string): Promise<ITodo> {
     return this.todoResource.getTodoById(id)
+      .then((result) => {
+        return result;
+      });
+  }
+
+  public dropAllTodos(): Promise<boolean> {
+    return this.todoResource.dropAllTodos()
       .then((result) => {
         return result;
       });
