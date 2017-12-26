@@ -22,7 +22,7 @@
     "e2e:rundriver": "webdriver-manager start",
     "e2e:runtests": "protractor protractor.conf.js",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
-    "serve": "node dist/server.js",
+    "serve": "node dist/app.js",
     "start": "npm run build && npm run serve",
     "test:db": "jasmine JASMINE_CONFIG_PATH=spec/support/jasmine.db.json",
     "test:j": "jasmine",

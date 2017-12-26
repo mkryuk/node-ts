@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-
 import { IUserService } from "./../../services/user.service/iuser.service";
 import { userService } from "./../../services/user.service/user.service";
 

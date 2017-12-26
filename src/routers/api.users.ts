@@ -1,20 +1,34 @@
-import * as express from "express";
+import * as  express from "express";
 import { passportObj } from "./../controllers/passport.controller/passport.controller";
-export let usersRouter = express.Router();
+import { userController, UserController } from "./../controllers/user.controller/user.controller";
 
-import { userController } from "./../controllers/user.controller/user.controller";
+export class UserRouter {
 
-/* Users API /api/users */
+  constructor(private router: express.Router, private controller: UserController) {
+    this.setupRouter();
+  }
 
-usersRouter.route("/")
-  // GET /api/users/
-  .get(userController.getAllUsers.bind(userController));
+  get userRouter() {
+    return this.router;
+  }
 
-usersRouter.route("/:id")
-  // GET /api/users/:id
-  .get(userController.getUserById.bind(userController));
+  private setupRouter() {
+    /* Users API /api/users */
 
-usersRouter.route("/:id/info")
-  .get(
-  passportObj.authenticate("bearer", { session: false }),
-  userController.getUserInfo.bind(userController));
+    this.router.route("/")
+      // GET /api/users/
+      .get(this.controller.getAllUsers.bind(this.controller));
+
+    this.router.route("/:id")
+      // GET /api/users/:id
+      .get(this.controller.getUserById.bind(this.controller));
+
+    this.router.route("/:id/info")
+      // GET /api/users/:id/info
+      .get(
+      passportObj.authenticate("bearer", { session: false }),
+      this.controller.getUserInfo.bind(this.controller));
+  }
+}
+
+export const userRouter = new UserRouter(express.Router(), userController).userRouter;

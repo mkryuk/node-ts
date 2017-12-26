@@ -1,9 +1,9 @@
 import supertest = require("supertest");
-import { server } from "./../../../server";
+import { app } from "./../../../app";
 
 describe("/GET users", () => {
   it("it should GET all users", (done) => {
-    supertest(server).get("/api/users")
+    supertest(app).get("/api/users")
       .set("Content-Type", "application/json")
       .expect(200)
       .end((err, res) => {
@@ -15,7 +15,7 @@ describe("/GET users", () => {
   });
 
   it("should get single user", (done) => {
-    supertest(server).get("/api/users/1")
+    supertest(app).get("/api/users/1")
       .set("Content-Type", "application/json")
       .expect(200)
       .end((err, res) => {
@@ -43,7 +43,7 @@ describe("/GET users", () => {
   describe("users auth section", () => {
     let token = "";
     beforeEach((done) => {
-      supertest(server)
+      supertest(app)
         .post("/api/login")
         .set("Content-Type", "application/json")
         .send({ username: "Antonette", email: "Shanna@melissa.tv" })
@@ -54,7 +54,7 @@ describe("/GET users", () => {
     });
 
     it("should get single user full info", (done) => {
-      supertest(server).get("/api/users/1/info")
+      supertest(app).get("/api/users/1/info")
         .set("Content-Type", "application/json")
         .set("Authorization", `Bearer ${token}`)
         .expect(200)
