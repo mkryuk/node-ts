@@ -1,6 +1,7 @@
 import * as express from "express";
 import { homeRouter } from "./api.home";
 import { loginRouter } from "./api.login";
+import { todoRouter } from "./api.todos";
 import { userRouter } from "./api.users";
 
 export interface IRoute {
@@ -22,6 +23,9 @@ export class ApiRouter {
       // API for users
       // Router for /api/users
       { url: "/users", router: userRouter },
+      // API for todos
+      // Router for /api/todos
+      { url: "/todos", router: todoRouter },
       // API for login
       // Router for /api/login
       { url: "/login", router: loginRouter },

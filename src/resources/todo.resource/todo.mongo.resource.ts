@@ -7,23 +7,37 @@ import { ITodoResource } from "./itodo.resource";
 export class TodoMongoResource implements ITodoResource {
   constructor(private Todo: mongoose.Model<ITodoModel>) {
   }
-  public addTodo(todo: ITodo): Promise<ITodoModel> {
-    return this.Todo.create(todo);
+  public addTodo(todo: ITodo): Promise<ITodo> {
+    return this.Todo.create(todo)
+      .then((result) => {
+        return this.toITodo(result);
+      });
   }
-  public removeTodo(conditions: object): mongoose.Query<void> {
-    return this.Todo.remove(conditions);
+  public removeTodo(conditions: object): Promise<any> {
+    return this.Todo.remove(conditions)
+      .then((result) => {
+        return result;
+      });
   }
-  public getAllTodos(userId: string): Promise<ITodoModel[]> {
+  public getAllTodos(userId: string): Promise<ITodo[]> {
     return this.Todo.find({ userId })
       .then((result) => {
-        return result;
+        return result.map((todo) => this.toITodo(todo));
       });
   }
-  public getTodoById(id: string): Promise<ITodoModel> {
+  public getTodoById(id: string): Promise<ITodo> {
     return this.Todo.findOne({ _id: id })
       .then((result) => {
-        return result;
+        return this.toITodo(result);
       });
+  }
+
+  private toITodo(obj: ITodoModel): ITodo {
+    return {
+      userId: obj.userId,
+      completed: obj.completed,
+      title: obj.title,
+    };
   }
 
 }

@@ -34,7 +34,6 @@ describe("mongodb test todos", () => {
 
     todoService.addTodo(todo)
       .then((result) => {
-        // verify _id property exists
         expect(result.title).not.toBeNull();
         expect(result.title).toEqual(todo.title);
         done();
