@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Error } from "mongoose";
 import { ITodo } from "../../interfaces/itodo";
 import { ITodoService } from "../../services/todo.service/itodo.service";
@@ -7,7 +7,7 @@ export class TodoController {
   constructor(private service: ITodoService) {
   }
   //  GET /api/todos
-  public getAllTodos(req: Request, res: Response, next: any) {
+  public getAllTodos(req: Request, res: Response, next: NextFunction) {
     const userId: string = "123123";
     return this.service.getAllTodos(userId)
       .then((result) => {
@@ -17,7 +17,7 @@ export class TodoController {
   }
 
   //  POST /api/todos
-  public addTodo(req: Request, res: Response, next: any) {
+  public addTodo(req: Request, res: Response, next: NextFunction) {
     const todo: ITodo = req.body;
     return this.service.addTodo(todo)
       .then((result) => {
@@ -27,7 +27,7 @@ export class TodoController {
   }
 
   //  DELETE /api/todos/:id
-  public removeTodo(req: Request, res: Response, next: any) {
+  public removeTodo(req: Request, res: Response, next: NextFunction) {
     const id: string = req.params.id;
     return this.service.removeTodo(id)
       .then((result) => {
