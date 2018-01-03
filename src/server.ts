@@ -69,4 +69,4 @@ export class Server {
   }
 }
 
-// export let server = this.app;
+export const appServer = new Server();

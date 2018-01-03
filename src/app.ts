@@ -1,5 +1,5 @@
 import { Express } from "express";
-import { Server } from "./server";
+import { appServer, Server } from "./server";
 class App {
 
   constructor(private server: Server) {
@@ -12,6 +12,6 @@ class App {
   }
 }
 
-const main = new App(new Server());
+const main = new App(appServer);
 const expressServer = main.run();
 export const app = main.app;
