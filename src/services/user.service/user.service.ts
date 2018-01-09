@@ -4,7 +4,7 @@ import { IDataResource, IUserService } from "./iuser.service";
 export class UserService implements IUserService {
   constructor(private dataResource: IDataResource) {
   }
-  public getUserById(id: number): IUser {
+  public getUserById(id: string): IUser {
     const data = this.dataResource.readFileSync("./data/users.json", "utf8");
     const parsed = JSON.parse(data);
     const users: IUser[] = parsed.users;

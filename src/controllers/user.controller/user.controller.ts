@@ -16,12 +16,12 @@ export class UserController {
 
   //  GET /api/users/:id
   public getUserById(req: Request, res: Response) {
-    const user = this.uService.getUserById(parseInt(req.params.id, 10));
+    const user = this.uService.getUserById(req.params.id);
     res.json({ id: user.id, name: user.name, username: user.username });
   }
   //  GET /api/users/:id/info
   public getUserInfo(req: Request, res: Response) {
-    const user = this.uService.getUserById(parseInt(req.params.id, 10));
+    const user = this.uService.getUserById(req.params.id);
     res.json(user);
   }
 }
