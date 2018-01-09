@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Error } from "mongoose";
 import { ITodo } from "../../interfaces/itodo";
+import { IUser } from "../../interfaces/iuser";
 import { ITodoService } from "../../services/todo.service/itodo.service";
 import { todoService } from "../../services/todo.service/todo.service";
 export class TodoController {
@@ -8,7 +9,7 @@ export class TodoController {
   }
   //  GET /api/todos
   public getAllTodos(req: Request, res: Response, next: NextFunction) {
-    const userId: string = "123123";
+    const userId: string = (req.user as IUser).id;
     return this.service.getAllTodos(userId)
       .then((result) => {
         return res.json(result);
@@ -19,6 +20,7 @@ export class TodoController {
   //  POST /api/todos
   public addTodo(req: Request, res: Response, next: NextFunction) {
     const todo: ITodo = req.body;
+    todo.userId = (req.user as IUser).id;
     return this.service.addTodo(todo)
       .then((result) => {
         return res.json(result);

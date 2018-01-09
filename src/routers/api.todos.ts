@@ -17,15 +17,19 @@ export class TodoRouter {
 
     this.router.route("/")
       // GET /api/todos/
-      .get(this.controller.getAllTodos.bind(this.controller))
+      .get(
+      passportObj.authenticate("bearer", { session: false }),
+      this.controller.getAllTodos.bind(this.controller))
       // POST /api/todos/
       .post(
-      // passportObj.authenticate("bearer", { session: false }),
+      passportObj.authenticate("bearer", { session: false }),
       this.controller.addTodo.bind(this.controller));
 
     this.router.route("/:id")
       // DELETE /api/todos/:id
-      .delete(this.controller.removeTodo.bind(this.controller));
+      .delete(
+      passportObj.authenticate("bearer", { session: false }),
+      this.controller.removeTodo.bind(this.controller));
   }
 }
 
