@@ -1,26 +1,44 @@
-# To build and run with Docker:
 #
-#  $ docker build -t node-ts .
-#  $ docker run -it --rm -p 8000:8000 node-ts
-#  $ docker run -d -p 8080:8000 -e "NODE_ENV=production" --name node1 node-ts
-#  $ docker run -d --net nodetest -e "NODE_ENV=production" --name node1 node-ts
-#  $ docker run -d --net nodetest -e "NODE_ENV=production" --name node2 node-ts
-#  $ docker run -d --net nodetest -p 8000:8000 --name node-ha-test node-ha
-FROM node:argon
+# ---- Base Node ----
+FROM alpine:3.5 AS base
+# install node
+RUN apk add --no-cache nodejs-current tini
+# set working directory
+WORKDIR /root/app
+# Set tini as entrypoint
+ENTRYPOINT ["/sbin/tini", "--"]
+# copy project file
+COPY package.json .
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+#
+# ---- Dependencies ----
+FROM base AS dependencies
+# install node packages
+RUN npm set progress=false && npm config set depth 0
+RUN npm install --only=production 
+# copy production node_modules aside
+RUN cp -R node_modules prod_node_modules
+# install ALL node_modules, including 'devDependencies'
+RUN npm install
 
-# Install app dependencies
-# COPY package.json /usr/src/app/
-# RUN npm install
-# RUN npm run build
+#
+# ---- Build ----
+# run linters, setup and build
+FROM dependencies AS build
+COPY . .
+RUN  npm run build
 
-# Bundle app source
-COPY ./node_modules/ /usr/src/app/node_modules/
-COPY ./dist/ /usr/src/app/dist/
-COPY ./public/ /usr/src/app/public/
-
+#
+# ---- Release ----
+FROM base AS release
+# copy production node_modules
+COPY --from=dependencies /root/app/prod_node_modules ./node_modules
+# copy public folder
+COPY --from=build /root/app/public ./public
+# copy data
+COPY --from=build /root/app/data ./data
+# copy compiled dist
+COPY --from=build /root/app/dist ./dist
+# expose port and define CMD
 EXPOSE 8080
-CMD ["node", "dist/server.js"]
+CMD npm run serve
