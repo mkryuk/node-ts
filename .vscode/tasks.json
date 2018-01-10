@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0",
+  "args": [
+    "--no-color"
+  ],
+  "tasks": [
+    {
+      "label": "start",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "dependsOn": [
+        "build",
+        "run"
+      ],
+      "presentation": {
+        "reveal": "never",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "build",
+      "group": "build",
+      "type": "npm",
+      "script": "watch",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "silent",
+        "panel": "new"
+      },
+      "problemMatcher": [
+        "$tsc-watch"
+      ]
+    },
+    {
+      "label": "run",
+      "group": "build",
+      "type": "npm",
+      "script": "serve:dev",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "silent",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
