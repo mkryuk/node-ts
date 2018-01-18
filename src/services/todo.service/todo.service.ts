@@ -1,7 +1,7 @@
-import { ITodo } from "../../interfaces/itodo";
-import { ITodoResource } from "../../resources/todo.resource/itodo.resource";
-import { todoMongoResource } from "../../resources/todo.resource/todo.mongo.resource";
-import { ITodoService } from "./itodo.service";
+import { ITodo } from '../../interfaces/itodo';
+import { ITodoResource } from '../../resources/todo.resource/itodo.resource';
+import { todoMongoResource } from '../../resources/todo.resource/todo.mongo.resource';
+import { ITodoService } from './itodo.service';
 
 export class TodoService implements ITodoService {
   constructor(private todoResource: ITodoResource) {

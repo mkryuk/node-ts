@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import jwt = require("jsonwebtoken");
-import { config } from "../../config";
+import { Request, Response } from 'express';
+import jwt = require('jsonwebtoken');
+import { config } from '../../config';
 const secretTokenKey = config.SECRET_TOKEN_KEY;
 
 export class AuthController {
@@ -9,7 +9,7 @@ export class AuthController {
   public login(req: Request, res: Response) {
     // if there is no req.user
     if (!req.user) {
-      throw new Error("user credentials empty");
+      throw new Error('user credentials empty');
     }
     // req.user should be filled by authentication middleware
     const token = this.createToken(req.user);

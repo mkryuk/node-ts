@@ -1,4 +1,4 @@
-import { IUser } from "../../interfaces/iuser";
+import { IUser } from '../../interfaces/iuser';
 
 export interface IDataResource {
   readFileSync(filename: string, encoding: string): string;

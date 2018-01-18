@@ -1,18 +1,18 @@
-import jwt = require("jsonwebtoken");
-import passport = require("passport");
-import { Strategy as BearerStrategy } from "passport-http-bearer";
-import { Strategy as LocalStrategy } from "passport-local";
-import { config } from "../../config";
-import { userService } from "./../../services/user.service/user.service";
+import jwt = require('jsonwebtoken');
+import passport = require('passport');
+import { Strategy as BearerStrategy } from 'passport-http-bearer';
+import { Strategy as LocalStrategy } from 'passport-local';
+import { config } from '../../config';
+import { userService } from './../../services/user.service/user.service';
 
 const secretTokenKey = config.SECRET_TOKEN_KEY;
 const localStrategy = new LocalStrategy({
-  passwordField: "email",
-  usernameField: "username",
+  passwordField: 'email',
+  usernameField: 'username',
 }, (username, password, cb) => {
   const user = userService.getUserByUsername(username);
   if (!user || user.email !== password) {
-    return cb(new Error("user not found"));
+    return cb(new Error('user not found'));
   }
   return cb(null, user);
 });
@@ -33,12 +33,12 @@ const bearerStrategy = new BearerStrategy(
         }
         const user = userService.getUserById(decoded.id);
         if (!user) {
-          return cb(new Error("user not found"));
+          return cb(new Error('user not found'));
         }
         return cb(null, user);
       });
     } else {
-      return cb("No token provided");
+      return cb('No token provided');
     }
   });
 

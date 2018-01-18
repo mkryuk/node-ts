@@ -1,11 +1,11 @@
-import * as express from "express";
-import { homeController, HomeController } from "./../controllers/home.controller/home.controller";
+import * as express from 'express';
+import { homeController, HomeController } from './../controllers/home.controller/home.controller';
 
 /* Home API /api/home */
 export class HomeRouter {
 
   constructor(private router: express.Router, private controller: HomeController) {
-    this.router.route("/")
+    this.router.route('/')
       // GET /api/home/
       .get(this.controller.index.bind(controller));
   }

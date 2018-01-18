@@ -1,5 +1,5 @@
-import * as mongoose from "mongoose";
-import { config } from "../../config";
+import * as mongoose from 'mongoose';
+import { config } from '../../config';
 
 export class MongoConnectionService {
   public readonly connection: mongoose.Connection;
@@ -16,24 +16,24 @@ export class MongoConnectionService {
     });
     this.setupTriggers(this.connection);
     // If the Node process ends, close the Mongoose connection
-    process.on("SIGINT", this.gracefulExit).on("SIGTERM", this.gracefulExit);
+    process.on('SIGINT', this.gracefulExit).on('SIGTERM', this.gracefulExit);
   }
 
   private setupTriggers(connection: mongoose.Connection) {
     connection
-      .once("open", () => {
+      .once('open', () => {
         // tslint:disable-next-line:no-console
         console.log(`mongodb connection created to ${this.connectionString}`);
       })
-      .on("disconnected", () => {
+      .on('disconnected', () => {
         // tslint:disable-next-line:no-console
-        console.log("mongodb disconnected");
+        console.log('mongodb disconnected');
       })
-      .on("reconnect", () => {
+      .on('reconnect', () => {
         // tslint:disable-next-line:no-console
-        console.log("mongodb reconnected");
+        console.log('mongodb reconnected');
       })
-      .on("error", (error: any) => {
+      .on('error', (error: any) => {
         // tslint:disable-next-line:no-console
         console.warn(`Warning: ${error}`);
       });

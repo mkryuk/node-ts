@@ -1,17 +1,17 @@
-import * as uuid from "uuid";
-import { config } from "../../../config";
-import { ITodo } from "../../../interfaces/itodo";
-import { AppModel, IAppModel } from "../../../models/app.model";
-import { ITodoResource } from "../../../resources/todo.resource/itodo.resource";
-import { TodoMongoResource } from "../../../resources/todo.resource/todo.mongo.resource";
-import { MongoConnectionService } from "../../../services/mongo.service/mongo.connection.service";
-import { ITodoService } from "../../../services/todo.service/itodo.service";
-import { TodoService } from "../../../services/todo.service/todo.service";
+import * as uuid from 'uuid';
+import { config } from '../../../config';
+import { ITodo } from '../../../interfaces/itodo';
+import { AppModel, IAppModel } from '../../../models/app.model';
+import { ITodoResource } from '../../../resources/todo.resource/itodo.resource';
+import { TodoMongoResource } from '../../../resources/todo.resource/todo.mongo.resource';
+import { MongoConnectionService } from '../../../services/mongo.service/mongo.connection.service';
+import { ITodoService } from '../../../services/todo.service/itodo.service';
+import { TodoService } from '../../../services/todo.service/todo.service';
 
 let todoService: ITodoService;
 
-describe("mongodb test todos", () => {
-  beforeAll((done) => {
+describe('mongodb test todos', () => {
+  beforeAll((done: DoneFn) => {
     const mongoConnection = new MongoConnectionService(config.MONGO_TEST_CONNECTION_STRING);
     const testModel = new AppModel(mongoConnection);
     const todoResource = new TodoMongoResource(testModel.Todo);
@@ -19,16 +19,16 @@ describe("mongodb test todos", () => {
     done();
   });
 
-  beforeEach((done) => {
+  beforeEach((done: DoneFn) => {
     // clear todos collection
     todoService.dropAllTodos()
       .then(() => { done(); });
   });
 
-  it("should add new todo", (done) => {
+  it('should add new todo', (done: DoneFn) => {
     const todo: ITodo = {
       completed: true,
-      title: "some Title",
+      title: 'some Title',
       userId: uuid.v1(),
     };
 

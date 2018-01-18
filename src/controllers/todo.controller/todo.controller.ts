@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from "express";
-import { Error } from "mongoose";
-import { ITodo } from "../../interfaces/itodo";
-import { IUser } from "../../interfaces/iuser";
-import { ITodoService } from "../../services/todo.service/itodo.service";
-import { todoService } from "../../services/todo.service/todo.service";
+import { NextFunction, Request, Response } from 'express';
+import { Error } from 'mongoose';
+import { ITodo } from '../../interfaces/itodo';
+import { IUser } from '../../interfaces/iuser';
+import { ITodoService } from '../../services/todo.service/itodo.service';
+import { todoService } from '../../services/todo.service/todo.service';
 export class TodoController {
   constructor(private service: ITodoService) {
   }
@@ -34,7 +34,7 @@ export class TodoController {
     return this.service.removeTodo(id)
       .then((result) => {
         if (result === null) {
-          const err: any = new Error("TodoNotFound");
+          const err: any = new Error('TodoNotFound');
           err.status = 404;
           throw err;
         }

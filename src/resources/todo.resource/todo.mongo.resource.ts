@@ -1,8 +1,8 @@
-import * as mongoose from "mongoose";
-import { ITodo } from "../../interfaces/itodo";
-import { appModel } from "../../models/app.model";
-import { ITodoModel } from "../../models/itodo.model";
-import { ITodoResource } from "./itodo.resource";
+import * as mongoose from 'mongoose';
+import { ITodo } from '../../interfaces/itodo';
+import { appModel } from '../../models/app.model';
+import { ITodoModel } from '../../models/itodo.model';
+import { ITodoResource } from './itodo.resource';
 
 export class TodoMongoResource implements ITodoResource {
   constructor(private Todo: mongoose.Model<ITodoModel>) {

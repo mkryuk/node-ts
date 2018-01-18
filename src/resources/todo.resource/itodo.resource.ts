@@ -1,6 +1,6 @@
-import { Query } from "mongoose";
-import { ITodo } from "../../interfaces/itodo";
-import { ITodoModel } from "../../models/itodo.model";
+import { Query } from 'mongoose';
+import { ITodo } from '../../interfaces/itodo';
+import { ITodoModel } from '../../models/itodo.model';
 
 export interface ITodoResource {
   removeTodo(id: string): Promise<ITodo>;

@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import * as os from "os";
+import { Request, Response } from 'express';
+import * as os from 'os';
 
 export class HomeController {
   //  GET /api/home

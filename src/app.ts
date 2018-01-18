@@ -1,5 +1,5 @@
-import { Express } from "express";
-import { appServer, Server } from "./server";
+import { Express } from 'express';
+import { appServer, Server } from './server';
 class App {
 
   constructor(private server: Server) {

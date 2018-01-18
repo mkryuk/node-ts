@@ -1,4 +1,4 @@
-import { ITodo } from "../../interfaces/itodo";
+import { ITodo } from '../../interfaces/itodo';
 
 export interface ITodoService {
   addTodo(todo: ITodo): Promise<ITodo>;
