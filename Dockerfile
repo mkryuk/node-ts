@@ -39,6 +39,8 @@ COPY --from=build /root/app/public ./public
 COPY --from=build /root/app/data ./data
 # copy compiled dist
 COPY --from=build /root/app/dist ./dist
+# copy pm2.yml file
+COPY --from=build /root/app/pm2.yml .
 # expose port and define CMD
 EXPOSE 8080
 CMD npm run serve
