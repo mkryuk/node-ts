@@ -24,7 +24,7 @@
     "e2e:runtests": "protractor protractor.conf.js",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "serve:dev": "nodemon --inspect ./dist/app.js",
-    "serve": "pm2 start pm2.yml",
+    "serve": "pm2 start pm2.yml && pm2 logs",
     "start:dev": "npm run build && npm run serve:dev",
     "start:w": "concurrently \"npm run watch\" \"npm run start:dev\"",
     "start": "npm run build && npm run serve",
