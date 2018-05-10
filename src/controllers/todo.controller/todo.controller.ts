@@ -1,13 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
-import { Error } from 'mongoose';
+import { inject } from 'inversify';
+import {
+  controller, httpDelete, httpGet, httpPost, httpPut,
+} from 'inversify-express-utils';
 import { ITodo } from '../../interfaces/itodo';
 import { IUser } from '../../interfaces/iuser';
+import { authBearer } from '../../middlewares/passport.middleware/passport.middleware';
 import { ITodoService } from '../../services/todo.service/itodo.service';
-import { todoService } from '../../services/todo.service/todo.service';
+import { TYPES } from '../../services/types';
+
+@controller('/todos')
 export class TodoController {
-  constructor(private service: ITodoService) {
-  }
+  constructor(@inject(TYPES.ITodoService) private service: ITodoService) { }
   //  GET /api/todos
+  @httpGet('/', authBearer)
   public getAllTodos(req: Request, res: Response, next: NextFunction) {
     const userId: string = (req.user as IUser).id;
     return this.service.getAllTodos(userId)
@@ -18,6 +24,7 @@ export class TodoController {
   }
 
   //  POST /api/todos
+  @httpPost('/', authBearer)
   public addTodo(req: Request, res: Response, next: NextFunction) {
     const todo: ITodo = req.body;
     todo.userId = (req.user as IUser).id;
@@ -29,6 +36,7 @@ export class TodoController {
   }
 
   //  DELETE /api/todos/:id
+  @httpDelete('/:id', authBearer)
   public removeTodo(req: Request, res: Response, next: NextFunction) {
     const id: string = req.params.id;
     return this.service.removeTodo(id)
@@ -43,5 +51,3 @@ export class TodoController {
       .catch(next);
   }
 }
-
-export const todoController = new TodoController(todoService);

@@ -1,4 +1,6 @@
 import { Express } from 'express';
+import 'reflect-metadata';
+
 import { appServer, Server } from './server';
 class App {
 

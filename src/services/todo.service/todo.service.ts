@@ -1,10 +1,12 @@
+import { inject, injectable } from 'inversify';
 import { ITodo } from '../../interfaces/itodo';
 import { ITodoResource } from '../../resources/todo.resource/itodo.resource';
-import { todoMongoResource } from '../../resources/todo.resource/todo.mongo.resource';
+import { TYPES } from '../../resources/types';
 import { ITodoService } from './itodo.service';
 
+@injectable()
 export class TodoService implements ITodoService {
-  constructor(private todoResource: ITodoResource) {
+  constructor(@inject(TYPES.ITodoResource) private todoResource: ITodoResource) {
   }
   public addTodo(todo: ITodo): Promise<ITodo> {
     return this.todoResource.addTodo(todo)
@@ -39,5 +41,3 @@ export class TodoService implements ITodoService {
   }
 
 }
-
-export const todoService = new TodoService(todoMongoResource);

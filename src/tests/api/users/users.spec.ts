@@ -22,7 +22,7 @@ describe('/GET users', () => {
         expect(err).toEqual(null);
         expect(res.body.error).toBe(undefined);
         expect(res.body).toBeDefined();
-        expect(res.body.id).toBe(1);
+        expect(res.body.id).toBe('1');
         done();
       });
   });
@@ -35,7 +35,7 @@ describe('/GET users', () => {
         expect(err).toEqual(null);
         expect(res.body.error).toBe(undefined);
         expect(res.body).toBeDefined();
-        expect(res.body.id).toBe(1);
+        expect(res.body.id).toBe('1');
         done();
       });
   });
@@ -62,7 +62,7 @@ describe('/GET users', () => {
           expect(err).toEqual(null);
           expect(res.body.error).toBe(undefined);
           expect(res.body).toBeDefined();
-          expect(res.body.id).toBe(1);
+          expect(res.body.id).toBe('1');
           done();
         });
     });

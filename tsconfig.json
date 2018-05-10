@@ -2,21 +2,17 @@
   "compilerOptions": {
     "module": "commonjs",
     "moduleResolution": "node",
-    "target": "es2015",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "noImplicitAny": true,
     "outDir": "dist",
     "preserveConstEnums": true,
     "sourceMap": true,
     "removeComments": true,
-    "typeRoots": [
-      "./node_modules/@types"
-    ]
   },
-  "include": [
-    "src/**/*"
-  ],
   "exclude": [
-    "node_modules",
-    "**/*-spec.ts"
+    "node_modules"
   ]
 }

@@ -1,8 +1,12 @@
+import { inject, injectable } from 'inversify';
 import * as mongoose from 'mongoose';
 import { config } from '../../config';
+import { IMongoConnectionService } from './imongo.connection.service';
 
-export class MongoConnectionService {
+@injectable()
+export class MongoConnectionService implements IMongoConnectionService {
   public readonly connection: mongoose.Connection;
+
   constructor(private connectionString: string) {
     // Mongoose: mpromise (mongoose's default promise library) is deprecated,
     // plug in your own promise library instead: http://mongoosejs.com/docs/promises.html
@@ -18,7 +22,9 @@ export class MongoConnectionService {
     // If the Node process ends, close the Mongoose connection
     process.on('SIGINT', this.gracefulExit).on('SIGTERM', this.gracefulExit);
   }
-
+  getConnection(): mongoose.Connection {
+    return this.connection;
+  }
   private setupTriggers(connection: mongoose.Connection) {
     connection
       .once('open', () => {
@@ -48,4 +54,4 @@ export class MongoConnectionService {
   }
 }
 
-export const mongoConnectionService = new MongoConnectionService(config.MONGO_CONNECTION_STRING);
+// export const mongoConnectionService = new MongoConnectionService(config.MONGO_CONNECTION_STRING);

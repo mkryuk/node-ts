@@ -1,8 +1,13 @@
 import * as fs from 'fs';
+import { inject, injectable } from 'inversify';
 import { IUser } from '../../interfaces/iuser';
+import { myContainer } from '../../ioc/ioc.config';
+import { TYPES } from '../../resources/types';
 import { IDataResource, IUserService } from './iuser.service';
+
+@injectable()
 export class UserService implements IUserService {
-  constructor(private dataResource: IDataResource) {
+  constructor(@inject(TYPES.IDataResource) private dataResource: IDataResource) {
   }
   public getUserById(id: string): IUser {
     const data = this.dataResource.readFileSync('./data/users.json', 'utf8');
@@ -26,4 +31,4 @@ export class UserService implements IUserService {
   }
 }
 
-export const userService = new UserService(fs);
+// export const userService = new UserService(fs);
